@@ -1,0 +1,29 @@
+ // POST api/values
+        public void Post([FromBody] Object value)
+        {
+            MailMessage mailMessage = new MailMessage("musa.itdu@gmail.com", "ahossain0917@gmail.com");
+
+            mailMessage.Subject = "Try Mail";
+
+            mailMessage.Body = value.ToString();
+
+            SmtpClient smtpClient = new SmtpClient();
+            smtpClient.Send(mailMessage);
+        }
+     
+     //WEBB.CONFG FILE
+     
+        <system.net>
+    <mailSettings>
+      <smtp deliveryMethod="Network">
+        <network host="smtp.gmail.com" enableSsl="true" port="587" userName="musa.itdu@gmail.com" password="shuffle406" />
+      </smtp>
+    </mailSettings>
+  </system.net>
+  
+  //WEBAPIOCONFIG
+   // Web API configuration and services
+            var corsAttr = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(corsAttr);
+            // Web API routes
+            config.MapHttpAttributeRoutes();
